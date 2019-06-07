@@ -1,4 +1,4 @@
-# Very handy shortcuts that I use in VSCode (these shortcuts are for macOS)
+# VERY HANDY SHORTCUTS THAT I USE IN VSCODE (THESE SHORTCUTS ARE FOR MACOS)
 
 1. Copy Line Down (shift + option + down)
     * does what it says
