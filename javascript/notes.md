@@ -3,6 +3,7 @@
 ## Hoisting
 
 [Good article explaining hositing](https://scotch.io/tutorials/understanding-hoisting-in-javascript)
+
 [Another great post for hoisting explanation](https://stackoverflow.com/questions/31219420/are-variables-declared-with-let-or-const-not-hoisted-in-es6)
 
 Here's an example that really helped me understand what it means when variables declared by let and const are hoisted.
