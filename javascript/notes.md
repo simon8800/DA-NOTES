@@ -12,12 +12,9 @@ Here's an example I wrote that really helped me understand what it means when va
 let x = "hello there"
 
 function hoisterino() {
-  function hello() {
-    console.log(x)
-  }
-  hello(); // I expect hello there
-  let x = "hello buddy"
-  hello(); // I expect hello buddy
+  hello(); // expect hello there
+  let x = "hello brodude"
+  hello(); // expect hello brodude
 }
 
 hoisterino();
@@ -28,7 +25,7 @@ I wrote in the comments what I expected. What ended up happening was a beautiful
 ReferenceError: Cannot access 'x' before initialization
 ```
 
-This means that in the function `hoisterino`, x was hoisted to the top of that scope, so the first time I try to call `hello`, x is uninitialized and thus I get the ReferenceError.
+This means that in the function `hoisterino`, x was hoisted to the top of that scope, so the first time I try to `console.log`, x is uninitialized and thus I get the ReferenceError.
 
 Note that if it was `var x = "hello buddy"`, we would get something totally different. That is because a variable declared with `var` will be hoisted, declared, and initialized with `undefined`.
 
