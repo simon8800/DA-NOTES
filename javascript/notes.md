@@ -29,3 +29,7 @@ ReferenceError: Cannot access 'x' before initialization
 ```
 
 This means that in the function `hoisterino`, x was hoisted to the top of that scope, so the first time I try to call `hello`, x is uninitialized and thus I get the ReferenceError.
+
+Note that if it was `var x = "hello buddy"`, we would get something totally different. That is because a variable declared with `var` will be hoisted, declared, and initialized with `undefined`.
+
+I leave it for the reader as an exercise to try it themselves. 
