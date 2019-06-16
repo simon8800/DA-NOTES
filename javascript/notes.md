@@ -12,9 +12,9 @@ Here's an example I wrote that really helped me understand what it means when va
 let x = "hello there"
 
 function hoisterino() {
-  console.log(x)
-  let x = "hello brodude"
-  console.log(x)
+  console.log(x) // I expect "hello there"
+  let x = "hello buddy"
+  console.log(x) // I execpt "hello buddy"
 }
 
 hoisterino();
