@@ -6,7 +6,7 @@
 
 [Another great post for hoisting explanation](https://stackoverflow.com/questions/31219420/are-variables-declared-with-let-or-const-not-hoisted-in-es6)
 
-Here's an example that really helped me understand what it means when variables declared by let and const are hoisted.
+Here's an example I wrote that really helped me understand what it means when variables declared by let and const are hoisted.
 
 ```javascript
 let x = "hello there"
@@ -28,4 +28,4 @@ I wrote in the comments what I expected. What ended up happening was a beautiful
 ReferenceError: Cannot access 'x' before initialization
 ```
 
-This means that in the function `hoisterino`, the x in that function `hoisterino` was hoisted to the top of that scope, so the first time I try to call `hello`, x is uninitialized and thus I get the ReferenceError.
+This means that in the function `hoisterino`, x was hoisted to the top of that scope, so the first time I try to call `hello`, x is uninitialized and thus I get the ReferenceError.
