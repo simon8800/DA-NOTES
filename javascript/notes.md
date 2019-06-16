@@ -12,15 +12,15 @@ Here's an example I wrote that really helped me understand what it means when va
 let x = "hello there"
 
 function hoisterino() {
-  hello(); // expect hello there
+  console.log(x)
   let x = "hello brodude"
-  hello(); // expect hello brodude
+  console.log(x)
 }
 
 hoisterino();
 ```
 
-I wrote in the comments what I expected. What ended up happening was a beautiful error message.
+I wrote in the comments what I expected. What ended up happening was this beautiful error message:
 ```bash
 ReferenceError: Cannot access 'x' before initialization
 ```
