@@ -54,3 +54,12 @@ You can add special characters in your HTML by using these [glyphs](https://css-
 <p>&nbsp;</p>
 <!-- this creates a whitespace in the p tag. -->
 ```
+
+## BASIC SEARCH ENGINE OPTIMIZATION (SEO)
+
+Use the `meta` tag to store basic information about your webpage.
+
+```html
+<!-- Example from Udemy's webpage -->
+<meta name="description" content="Udemy is the world&#039s largest destination for online courses...">
+```
