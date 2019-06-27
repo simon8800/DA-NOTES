@@ -1,12 +1,20 @@
-/*
-Given integers x and y,
-find the hamming distance between them.
+// The Hamming distance between two integers 
+// is the number of positions at which the 
+// corresponding bits are different.
 
-Example:
-x = 93
-y = 73
-Output: 2;
-*/
+// Given two integers x and y, calculate the Hamming distance.
+
+// Note:
+// 0 ≤ x, y < 231.
+
+// Example:
+
+// Input: x = 1, y = 4
+
+// Output: 2
+
+
+// My shitty solution 
 
 var hammingDistance = function(x, y) {
   function euclideanAlgo(num) {
@@ -58,6 +66,20 @@ var hammingDistance = function(x, y) {
 
 hammingDistance(93, 73);
 
-// 93 => 1011101
-// 72 => 1001001
+// kmjonmastro's solution (Javascript solution faster than 71.45% of Javascript submissions)
 
+// var hammingDistance = function(x, y) {
+//   let count = 0;
+//   while(x > 0 || y > 0){
+//       let remx = x % 2;
+//       let remy = y % 2;
+      
+//       if (remx != remy) {            
+//           count++;
+//       }
+      
+//       x = Math.floor(x/2);
+//       y = Math.floor(y/2);
+//   }    
+//   return count;
+// };

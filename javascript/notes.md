@@ -144,9 +144,9 @@ anotherArray // ['there', 'my', 'good', 'friend']
 
 ## FUNCTIONS
 
-### toString
+### Number.toString
 
-number.toString accepts 1 optional argument.
+Number.toString accepts 1 optional argument.
 
 > Optional. Which base to use for representing a numeric value. Must be an integer between 2 and 36. - From w3school
 
@@ -154,3 +154,5 @@ number.toString accepts 1 optional argument.
 let num = 123
 let n = num.toString(2) // "1111011"
 ```
+
+### String.splice
