@@ -6,7 +6,7 @@ Remember, variables declared with `var` are function-scoped. So the following va
 
 ```javascript
 for (var i = 0; i < 10; i++) {
-  console.log(i)
+  console.log(i);
 }
 // 1
 // 2
@@ -14,7 +14,7 @@ for (var i = 0; i < 10; i++) {
 // ...
 // ...
 // 9
-console.log(i) // 10
+console.log(i); // 10
 ```
 
 ## HOISTING
@@ -26,11 +26,11 @@ console.log(i) // 10
 Here's an example I wrote that really helped me understand what it means when variables declared by `let` and `const` are hoisted.
 
 ```javascript
-let x = "hello there"
+let x = "hello there";
 
 function hoisterino() {
   console.log(x) // I expect "hello there"
-  let x = "hello buddy"
+  let x = "hello buddy";
   console.log(x) // I expect "hello buddy"
 }
 
@@ -105,10 +105,10 @@ let myObj = {
 	state: "New York",
 	city: "Brooklyn",
 	parks: ["Prospect Park"]
-}
+};
 
 const { state } = myObj;
-state // "New York"
+state; // "New York"
 ```
 
 ### ARRAY
@@ -119,11 +119,11 @@ let myArray = [
 	'there', 
 	'my', 
 	'good', 
-	'friend']
+	'friend'];
 
 const [greeting,,,goodie] = myArray;
-greeting // 'hello'
-goodie // 'good'
+greeting; // 'hello'
+goodie; // 'good'
 ```
 
 ```javascript
@@ -134,12 +134,12 @@ let myArray = [
 	'there', 
 	'my', 
 	'good', 
-	'friend']
+	'friend'];
 
 const [greeting, ...anotherArray] = myArray;
 
-greeting // 'hello'
-anotherArray // ['there', 'my', 'good', 'friend']
+greeting; // 'hello'
+anotherArray;// ['there', 'my', 'good', 'friend']
 ```
 
 ## FUNCTIONS
@@ -151,8 +151,32 @@ Number.toString accepts 1 optional argument.
 > Optional. Which base to use for representing a numeric value. Must be an integer between 2 and 36. - From w3school
 
 ```javascript
-let num = 123
-let n = num.toString(2) // "1111011"
+let num = 123;
+let n = num.toString(2); // "1111011"
 ```
 
-### String.splice
+## DATA STRUCTURES
+
+### OBJECTS
+
+`Object.hasOwnProperty(prop)` or `prop in Object` will return true or false depending on wether the object has or doesn't have that property.
+
+```javascript
+let myObj = {'name': 'Simon', 'laptop': 'macbook'};
+myObj.hasOwnProperty('name'); //=> true
+myObj.hasOwnProperty('lastName'); //=> false
+
+'name' in myObj; //=> true
+'dog' in myObj; //=> false
+```
+
+## RETURN WITH &&
+`&&` actually returns a value.
+If the left side is falsy, the left side gets returned.
+If the left side is truthy, the right side gets returned.
+
+```javascript
+'hello' && 'jello'; //=> 'jello'
+0 && 'jello'; //=> 0
+'jello' && false; //=> false
+```
