@@ -63,3 +63,35 @@ Use the `meta` tag to store basic information about your webpage.
 <!-- Example from Udemy's webpage -->
 <meta name="description" content="Udemy is the world&#039s largest destination for online courses...">
 ```
+
+## BOOLEAN ATTRIBUTES
+
+Attributes with a boolean value just needs to be present in the tag to be turned on. Heres an example with the attribute `controls`:
+
+```html
+<!-- example from freecodecamp -->
+<audio id="meowClip" controls>
+  <source src="audio/meow.mp3" type="audio/mpeg" />
+  <source src="audio/meow.ogg" type="audio/ogg" />
+</audio>
+```
+
+## ACCESSIBILITY
+
+### Images
+
+Images should have an `alt` text to describe the image in case the image doesn't load or the link is broken. If explaining the image in `alt` is redundant because the following sentences describe the picture, then leaving `alt` as an empty string may be appropriate i.e. `alt=""`. 
+
+### LINKS
+
+Having a list of 'Click here' links is not very helpful for people with screen readers.
+
+Try using more descriptive text. Example:
+
+```html
+<!-- from this -->
+<p>Hey! <a href="">Click here</a> for information about godzilla-sized kangaroos!</p>
+
+<!-- to this -->
+<p>Hey! Click here for <a href="">information about godzilla-sized kangaroos!</a></p>
+```
