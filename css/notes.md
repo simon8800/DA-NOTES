@@ -47,3 +47,10 @@ There is a difference between using 0 and none. Find the answer in this
 
 TL;DR: The values correspond to different properties. For example, `border:0;` will set the `border-width: 0;`while `border:none;` will set `border-style: none;`.
 
+## CSS FLEXBOX
+
+Just check out this [cheatsheet for flexbox.](https://yoksel.github.io/flex-cheatsheet/)
+
+## CSS GRID
+
+Just check out this [cheatsheet for grid.](http://grid.malven.co/)
