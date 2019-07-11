@@ -294,6 +294,132 @@ e.g., `/[a-z0-9]`
 
 ### NEGATED CHARACTER SETS
 
-You also may want to create a `character set` of characters you **don't** want to match. You can do so by using the `caret` character `^`. 
+You also may want to create a `character set` of characters you **don't** want to match. You can do so by using the `caret` character `^` after the bracket in a character set. i.e. `/[^a]/`
 
 e.g., `/[^aeiou]/` will not match any vowels.
+
+### REPEATED CHARACTERS
+
+You may want to match characters that occur one or more times in a row. This means at least once, and may be repeated consecutively.
+
+Use the `+` character.
+
+```javascript
+let myRegex = /s+/g
+let myString = "Mississippi"
+myString.match(myRegex) // ["ss", "ss"]
+
+let myOtherString = "Misisipi"
+myOtherString.match(myRegex) // ["s", "s"]
+```
+
+Matching characters that occur zero or more times is also possible by using the asterisk character: `*`.
+
+```javascript
+let myRegex = /so*/g
+let myString = "sooooooo what's going on?"
+myString.match(myRegex) // ["sooooooo"]
+
+let myOtherString = "sun is up"
+myOtherString.match(myRegex) // ["s", "s"]
+
+let anotherString = "so what's good?"
+anotherString.match(myRegex) // ["so"]
+```
+
+### LAZY MATCHING
+
+Regular expressions that are `greedy` matches will find the longest possible substring that matches. 
+
+e.g., `/t[a-z]*i` will match `titani` from `titanic`.
+
+If we wanted the shortest substring, that would be `lazy` matching . We can use the `?` character to change it to lazy matching. 
+
+e.g., `/t[a-z]*?i/` will match `ti` from `titanic`.
+
+### MATCH BEGINNING STRING PATTERNS
+
+We can also use regex to search for patterns in specific positions in strings.
+
+Outside of `character sets`, the caret character `^` is used to search for patters at the beginning of a string.
+
+```javascript
+let myRegex = /^bacon/
+let myString = "bacon pancakes"
+myRegex.test(myString) // true
+
+let myOtherString = "making bacon pancakes"
+myRegex.test(myOtherString) // false
+```
+
+### MATCH ENDING STRING PATTERNS
+
+To search the end of strings, use the `dollar sign` characer: `$` at the end of the regex.
+
+```javascript
+let myRegex = /waddup$/
+let myString = "so waddup"
+
+myRegex.test(myString) // true
+```
+
+### MATCH ALL LETTERS AND NUMBERS
+
+We already know how to use `character sets` like `/[a-z]/`. 
+
+This `/[a-zA-Z0-9_]/` is the same as `/\w/`. The `\w` part is a shortcut. Note that this also includes the underscore character: `_`.
+
+`w` meaning any word character.
+
+```javascript
+let myRegex = /\w/g
+let myString = 'yo waddup 6ix9ine'
+
+myString.match(myRegex).length // 15
+```
+
+### MATCH ALL EXCEPT LETTERS AND NUMBERS
+
+The opposite of `\w` is `\W`. 
+
+`\W` is the same as `/[^A-Za-z0-9_]/`.
+
+```javascript
+let myRegex = /\W/g
+let myString = "It's so cold!!"
+
+myString.match(myRegex).length // 5 (it counted white space as well)
+```
+
+### MATCH ALL NUMBERS
+
+You can match all numbers using `\d`. `\d` is the same is `[0-9]`.
+
+### MATCH ALL NONNUMBERS
+
+The shortcut to nondigits is `\D` which is the same as `[^0-9]`.
+
+### SEARCH FOR WHITESPACE
+
+Use `\s` to search for whitespace in a string.
+
+### SEARCH FOR NON-WHITESPACE
+
+Use `\S` to search for non-whitespace characters in a string.
+
+### SPECIFIY UPPER AND LOWER NUMBER OF MATCHES
+
+We can use curly braces: `{}` as `quantity specifiers` which sets the upper and lower limit for the amount of characters. The first argument is the lower limit and second argument is the upper limit.
+
+For example we only want the substring with `a` appearing 3 to 5 times. `/a{3,5}/`
+
+### SPECIFY ONLY THE LOWER NUMBER OF MATCHES
+
+Just omit the second argument. e.g., `/a{3,}/` will return a match of 3 or more `a`'s. Note: you must still have the comma to do this.
+
+### SPECIFY EXACT NUMBER OF MATCHES
+
+Only have one number in the curly braces (no comma) to specify the exact number of matches you want.
+
+e.g., `/a{3}/` will return matches with exactly three `a`'s.
+
