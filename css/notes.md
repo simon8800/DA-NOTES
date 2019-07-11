@@ -54,3 +54,7 @@ Just check out this [cheatsheet for flexbox.](https://yoksel.github.io/flex-chea
 ## CSS GRID
 
 Just check out this [cheatsheet for grid.](http://grid.malven.co/)
+
+Rows or Columns first?
+
+For shorthand properties, and just a good rule in general: think RC Cola, **rows then columns**.
