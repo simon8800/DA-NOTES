@@ -2,6 +2,12 @@
 
 ## About
 
-Trying to learn everything from basic web design to javascript to who knows what.
+There are notes for:
 
-Feel free to use these notes! The geeks shall inherit the Earth!
+- html
+- javascript
+- python
+- ruby
+- css
+- sql
+- algorithms
