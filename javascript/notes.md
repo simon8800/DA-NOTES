@@ -423,3 +423,34 @@ Only have one number in the curly braces (no comma) to specify the exact number 
 
 e.g., `/a{3}/` will return matches with exactly three `a`'s.
 
+### CHECK FOR ALL OR NONE
+
+Sometimes you have a word like 'color' or 'colour' and you want both. You can check for the existence of the character `u` using `?`.
+
+e.g., `/colou?r/`
+
+### POSITIVE AND NEGATIVE LOOKAHEAD
+
+`Lookaheads` are patterns that tell JS to look-ahead in the string to check for patterns further along. 
+
+There are two kinds of `lookaheads`: `positive lookahead` and `negative lookahead`.
+
+`Positive lookahead` will look to make sure the element in the search pattern is there, but won't actually match it. The syntax for `positive lookahead` is: `(?=...)` where `...` is the required part that is not matched.
+
+Given `hello world` and you only want `hello` if ` world` is present afterwards. 
+
+```javascript
+let myRegex = /hello(?=\sworld)/
+let myString = "hello world"
+
+myString.match(myRegex) // hello
+```
+
+`Negative lookahead` will look ahead and check to make sure the element in the search pattern is **not** there. The syntax is: `(?!...)` where `...` is the pattern you don't want to be there.
+
+```javascript
+let myString = "dragon ahead"
+let myRegex = /dragon(?!\sahead)/
+
+myString.match(myRegex) // null
+```
