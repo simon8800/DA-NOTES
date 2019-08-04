@@ -97,6 +97,74 @@ btn.addEventListener( "click", function click(evt){
 	console.log("button clicked");
 }, /*capturingPhase=*/false );
 ```
+## -----------THIS-----------
+
+Using `call()` will give a function context to what `this` is.
+
+```javascript
+function greet(){
+	console.log(`Hi, I'm ${this.name}!`);
+}
+
+let me = {name: "Simon"}
+greet.call(me);
+```
+
+### FUNCTIONS & `THIS`
+If you want to refer to the function itself, you have to use the variable that points to the function. You cannot use `this` unless you provide context with `call()`.
+
+```javascript
+// wrong
+function foo(){
+	this.count++;
+}
+foo.count = 0;
+foo();
+foo.count // 0
+```
+```javascript
+// right
+function foo(){
+	foo.count++;
+}
+foo.count = 0;
+foo();
+foo.count // 1
+
+// another way with call
+function foo(){
+	this.count++
+}
+foo.count = 0;
+foo.call(foo);
+foo.count // 1
+```
+
+>`this` is not an author-time binding but a runtime binding -[You Don't Know JS](https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch1.md) 
+
+### `bind()`
+
+ES5 has a built-in function `bind()` that allows you to *hard-bind* an object to a function.
+
+```javascript
+function foo(){
+	console.log(this.a);
+}
+let obj = {a: 42};
+let objfoo = foo.bind(obj);
+objfoo(); // 42
+```
+
+As of ES6, the hard-bound function created by `bind()` has a `.name` property which will show the original function it was derived from.
+
+```javascript
+function foo(){
+	console.log(this.a)
+}
+let obj = {a: 42};
+let objfoo = foo.bind(obj);
+objfoo.name // bound foo
+```
 
 ## -----------DESTRUCTURING (ES6)-----------
 
