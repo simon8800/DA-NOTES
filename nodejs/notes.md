@@ -183,8 +183,141 @@ When we watch something on Netflix, we don't wait for the whole film to be proce
 - Can create streams in Node.js to transfer data
 - Increase performance
 
-## READABLE STREAMS
+## STREAMS
 
 - Writable streams - allow Node.js to write data to a stream
 - Readable streams - allow Node.js to read data from a stream
 - Duplex - can read and write to a stream
+
+### READABLE STREAM 
+
+```javascript
+const http = require('http');
+const fs = require('fs');
+
+var myReadStream = fs.createReadStream(__dirname + '/readMe.txt', 'utf8');
+
+// everytime a chunk is received, it gets passed into the callback function
+myReadStream.on('data', function(chunk){
+  console.log('new chunk received:');
+  console.log(chunk);
+});
+```
+
+### WRITABLE STREAM
+
+```javascript
+const http = require('http');
+const fs = require('fs');
+
+var myReadStream = fs.createReadStream(__dirname + '/readMe.txt', 'utf8');
+
+var myWriteStream = fs.createWriteStream(__dirname + '/writeMe.txt');
+
+myReadStream.on('data', function(chunk){
+  console.log('new chunk received');
+  // write to stream everytime a chunk is received
+  myWriteStream.write(chunk);
+});
+```
+
+### PIPES
+
+This does both reading and writing for us.
+
+```javascript
+const http = require('http');
+const fs = require('fs');
+
+var myReadStream = fs.createReadStream(__dirname + '/readMe.txt', 'utf8');
+
+var myWriteStream = fs.createWriteStream(__dirname + '/writeMe.txt');
+
+// pipe() does both for us
+myReadStream.pipe(myWriteStream);
+```
+
+## NPM
+
+Using `npm init` creates a `package.json` file that tells other developers what dependencies your project needs. 
+
+### INSTALLING AND UNINSTALL PACKAGES
+
+Use `npm install package-name` to install your package.
+
+According to [Al Gonzales](https://teamtreehouse.com/community/npm-uninstall-removes-dependency-in-json), at some point `npm install package-name` has the default behavior of saving dependenies, and `npm uninstall package-name` will also remove saved dependencies. To install without saving, use the `--no-save` flag. To uninstall without removing a saved dependency, use the `--no-save` flag.
+
+### GOOD READS ON NPM
+
+- [Everything you wanted to know about package-lock.json](https://blog.quigley.codes/everything-you-wanted-to-know-about-package-lock-json/?dr=https://medium.com/p/b81911aa8ab8)
+
+- [When to install npm packages globally](https://flaviocopes.com/npm-packages-local-global/)
+
+- [Best of npm install -g](https://hackernoon.com/the-best-of-npm-install-g-9ab9d749eeb1)
+
+### COOL NPM PACKAGES
+
+- [nodemon](https://www.npmjs.com/package/nodemon) helps you automatically restart your node application when file changes are made.
+
+## EXPRESS
+
+- Easy and flexible routing system
+- Integrates with many templating engines
+- Contains a middleware framework
+
+```javascript
+// use express
+const express = require('express');
+
+// fire up express and lets us access all its awesome features
+const app = express();
+
+// listen to port 3000
+app.listen(3000);
+```
+
+```javascript
+// send html
+app.get('/', function(req, res){
+  res.sendFile(__dirname + '/index.html');
+})
+```
+
+### EXPRESS: RESPONDING TO REQUESTS
+
+- GET `app.get('route', fn)`
+- POST `app.post('route', fn)`
+- DELETE `app.delete('route', fn)`
+
+### EXPRESS: ROUTE PARAMS
+
+```javascript
+// :id is dynamic
+// access the param with req.params.paramName
+app.get('/profile/:id', function(req, res){
+  res.send('You requested to see a profile with the id of ' + req.params.id);
+});
+```
+
+### TEMPLATE ENGINES
+
+[EJS](https://ejs.co/) lets you serve up html with embedded JavaScript. Very similar to `.erb` files if you're familar with Sinatra or Ruby on Rails.
+
+To use it in express, you need to let `app` know by invoking `set('view engine', 'ejs')` i.e., `app.set('view engine', 'ejs')`.
+
+You need a folder called `views` and in there you can store `.ejs` files. In those `.ejs` files you can write html and embed javascript by using `<%= javascript here %>` to output something, and `<% javascript here %>` to evaluate something.
+
+Super simple example:
+```ejs
+<html>
+  <body>
+    <ul>
+      <% for (let i = 0; i < 5; i++) {%>
+        <li>
+          <%= 'This is loop number: ' + i %>
+        </li>
+      <%}%>
+    </ul>
+  </body>
+</html>
+```
