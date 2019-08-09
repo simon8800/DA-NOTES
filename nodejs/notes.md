@@ -321,3 +321,10 @@ Super simple example:
   </body>
 </html>
 ```
+
+I don't want to use node to serve html files, so my notes for this section ends here.
+
+## RESTful API WITH NODE
+
+Notes from [rwieruch](https://www.robinwieruch.de/minimal-node-js-babel-setup/)
+
