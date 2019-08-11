@@ -522,3 +522,72 @@ let myRegex = /dragon(?!\sahead)/
 
 myString.match(myRegex) // null
 ```
+
+## ASYNCHRONOUS JAVASCRIPT
+
+### CREATING A PROMISE
+
+We can create a new Promise object as follows:
+
+```javascript
+// a Promise object needs an executor function that has two parameters which will determine whether the promise has been resolved or rejected
+let exectuor = (resolve, reject) => {
+	if (someCondition) {
+		resolve('what the promise returns if success') // it is still a promise
+	} else {
+		reject('what the promise returns if rejected') // still a promise
+	}
+}
+let myPromise = new Promise(executor);
+```
+
+You can use the higher order function `.then()` which takes 0-2 callback functions. The first is a function to handle a resolved Promise and the second is a function to handle a rejected Promise.
+
+```javascript
+let myPromise = new Promise((resolve, reject) => {
+	if (someCondition) {
+		resolve('success!')
+	} else {
+		reject('no bueno :(')
+	}
+})
+
+const handleSuccess = successValue => console.log(successValue);
+const handleFailure = failValue => console.log(failValue);
+
+// depending on what that someCondition is, here are the possible outcomes
+myPromise.then(handleSuccess, handleFailure) // success!
+myPromise.then(handleSuccess, handleFailure) // no bueno :(
+```
+
+It's nicer to have separation of concerns for handling success and failure. Luckily we have `.catch()` to help us. When there is an error, `.catch()` will run right after, bypassing all `.then()` that come before `.catch()`.
+
+```javascript
+// assume prom is a promise
+prom
+	.then(resolvedValue => {
+		console.log(resolvedValue)
+	})
+	.catch(rejectedValue => {
+		console.log(rejectedValue)
+	})
+```
+
+Let's use `.then()` the way it's commonly used instead of just logging results. If we chain multiple `.then()`, we need to make sure that we `return` something in each one.
+
+```javascript
+prom
+	.then(resolvedValue1 => {
+		return doSomething(resolvedValue)
+	})
+	.then(resolvedValue2 => {
+		// resolvedValue2 has the value of whatever the last .then returns
+		console.log(resolvedValue2)
+	})
+	.catch(rejectedValue) => {
+		console.log(rejectedValue);
+	}
+```
+
+Notice that we chain `.then()` together instead of nesting them. It is the common practice to chain rather than nest. It is much easier to read and manage.
+
