@@ -525,6 +525,10 @@ myString.match(myRegex) // null
 
 ## ASYNCHRONOUS JAVASCRIPT
 
+[Notes from Codecademy](https://www.codecademy.com/)
+
+TLDR version of Asynchronous JavaScript: it allows you to perform more than one thing at once. You should [read this blog](https://blog.bitsrc.io/understanding-asynchronous-javascript-the-event-loop-74cd408419ff) for a better understanding of Async JS.
+
 ### CREATING A PROMISE
 
 We can create a new Promise object as follows:
@@ -540,6 +544,10 @@ let exectuor = (resolve, reject) => {
 }
 let myPromise = new Promise(executor);
 ```
+
+Remember to use the resolve or reject functions or the Promise will 5ever be pending.
+
+### HANDLING RESOLVED OR REJECTED PROMISE
 
 You can use the higher order function `.then()` which takes 0-2 callback functions. The first is a function to handle a resolved Promise and the second is a function to handle a rejected Promise.
 
@@ -590,4 +598,56 @@ prom
 ```
 
 Notice that we chain `.then()` together instead of nesting them. It is the common practice to chain rather than nest. It is much easier to read and manage.
+
+### CONCURRENT PROMISES
+
+Sometimes we have more than one asynchronous process happening. We can use `Promise.all` to handle everything. It accepts an array of promises as an argument. i.e., `Promise.all([promise1, promise2, promise3])`
+
+You can process `Promise.all` like any other promise. The return value is an array of resolved / rejected promises. If any of the promises in the array is rejected, the whole `Promise.all` is rejected.
+
+## ASYNC...AWAIT
+
+`async` and `await` are new keywords to help us write asynchronous JavaScript with easier to read and understand syntax. It provides the same functionality as the other way you know how to write async code, it is just syntactic sugar.
+
+We use `async` to write functions that handle asychronous actions. We can just write whatever logic within that function and invoke it. The logic within is handled asynchronously.
+
+```javascript
+async function myFunc(){
+	// Function body here
+};
+
+myFunc();
+```
+
+```javascript
+// async function expressions (arrow function)
+const myFunc = async () => {
+	// Function body here
+};
+myFunc();
+```
+
+`async` functions always return a Promise, which means we can use `.then`, `.catch`, and `.finally`. 
+
+Three things that can go down depending on what's returned by the `async` function:
+
+- If the function returns nothing, it will return a Promise with a resolved value of `undefined`.
+- If there's a non-Promise value returned from the function, it will return a Promise resolved to that value.
+- If there's a Promise value returned from the function, it will return just that Promise.
+
+An `async` function is almost always accompanied with the `await` keyword inside it. The `await` keyword can only be used inside an `async` function and it is an operator. It returns the resolved value of a Promise. 
+
+Here's an example:
+
+```javascript
+// makeCoffee is a function that returns a Promise that resolves to the value of a random coffee drink
+async function coffeeTime(){
+	let coffee = await makeCoffee()
+	console.log(`This ${coffee} is delicious!`)
+}
+
+coffeeTime(); // This frappe is delicious!
+```
+
+If you try calling `makeCoffee` without `await`, `coffee` will immediately be set the value of a pending Promise. **So don't forget!**
 
