@@ -31,15 +31,16 @@ Here's an example I wrote that really helped me understand what it means when va
 let x = "hello there";
 
 function hoisterino() {
-  console.log(x) // I expect "hello there"
+  console.log(x); // I expect "hello there"
   let x = "hello buddy";
-  console.log(x) // I expect "hello buddy"
+  console.log(x); // I expect "hello buddy"
 }
 
 hoisterino();
 ```
 
 I wrote in the comments what I expected. What ended up happening was this beautiful error message:
+
 ```bash
 ReferenceError: Cannot access 'x' before initialization
 ```
@@ -48,7 +49,7 @@ This means that in the function `hoisterino`, x was hoisted to the top of that s
 
 Note that if it was `var x = "hello buddy"`, we would get something totally different. That is because a variable declared with `var` will be hoisted, declared, and initialized with `undefined`.
 
-I leave it for the reader as an exercise to try it themselves. 
+I leave it for the reader as an exercise to try it themselves.
 
 ## -----------ENGINE, COMPILER, SCOPE-----------
 
@@ -59,6 +60,7 @@ I leave it for the reader as an exercise to try it themselves.
 ## -----------BLOCK SCOPING-----------
 
 Example from 'You Don't Know JS':
+
 ```javascript
 function process(data) {
 	// do something interesting
@@ -97,60 +99,63 @@ btn.addEventListener( "click", function click(evt){
 	console.log("button clicked");
 }, /*capturingPhase=*/false );
 ```
+
 ## -----------THIS-----------
 
 Using `call()` will give a function context to what `this` is.
 
 ```javascript
-function greet(){
-	console.log(`Hi, I'm ${this.name}!`);
+function greet() {
+  console.log(`Hi, I'm ${this.name}!`);
 }
 
-let me = {name: "Simon"}
+let me = { name: "Simon" };
 greet.call(me);
 ```
 
 ### FUNCTIONS & `THIS`
+
 If you want to refer to the function itself, you have to use the variable that points to the function. You cannot use `this` unless you provide context with `call()`.
 
 ```javascript
 // wrong
-function foo(){
-	this.count++;
+function foo() {
+  this.count++;
 }
 foo.count = 0;
 foo();
-foo.count // 0
+foo.count; // 0
 ```
+
 ```javascript
 // right
-function foo(){
-	foo.count++;
+function foo() {
+  foo.count++;
 }
 foo.count = 0;
 foo();
-foo.count // 1
+foo.count; // 1
 
 // another way with call
-function foo(){
-	this.count++
+function foo() {
+  this.count++;
 }
 foo.count = 0;
 foo.call(foo);
-foo.count // 1
+foo.count; // 1
 ```
 
->`this` is not an author-time binding but a runtime binding -[You Don't Know JS](https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch1.md) 
+> `this` is not an author-time binding but a runtime binding -[You Don't Know JS](https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch1.md)
 
 ### `bind()`
 
-ES5 has a built-in function `bind()` that allows you to *hard-bind* an object to a function.
+ES5 has a built-in function `bind()` that allows you to _hard-bind_ an object to a function.
 
 ```javascript
-function foo(){
-	console.log(this.a);
+function foo() {
+  console.log(this.a);
 }
-let obj = {a: 42};
+let obj = { a: 42 };
 let objfoo = foo.bind(obj);
 objfoo(); // 42
 ```
@@ -158,12 +163,12 @@ objfoo(); // 42
 As of ES6, the hard-bound function created by `bind()` has a `.name` property which will show the original function it was derived from.
 
 ```javascript
-function foo(){
-	console.log(this.a)
+function foo() {
+  console.log(this.a);
 }
-let obj = {a: 42};
+let obj = { a: 42 };
 let objfoo = foo.bind(obj);
-objfoo.name // bound foo
+objfoo.name; // bound foo
 ```
 
 ## -----------DESTRUCTURING (ES6)-----------
@@ -172,9 +177,9 @@ objfoo.name // bound foo
 
 ```javascript
 let myObj = {
-	state: "New York",
-	city: "Brooklyn",
-	parks: ["Prospect Park"]
+  state: "New York",
+  city: "Brooklyn",
+  parks: ["Prospect Park"]
 };
 
 const { state } = myObj;
@@ -184,14 +189,9 @@ state; // "New York"
 ### ARRAY
 
 ```javascript
-let myArray = [
-	'hello', 
-	'there', 
-	'my', 
-	'good', 
-	'friend'];
+let myArray = ["hello", "there", "my", "good", "friend"];
 
-const [greeting,,,goodie] = myArray;
+const [greeting, , , goodie] = myArray;
 
 greeting; // 'hello'
 goodie; // 'good'
@@ -200,17 +200,12 @@ goodie; // 'good'
 ```javascript
 // WITH REST OPERATOR (...)
 // REST ELEMENT MUST BE LAST ELEMENT (in this case: anotherArray)
-let myArray = [
-	'hello', 
-	'there', 
-	'my', 
-	'good', 
-	'friend'];
+let myArray = ["hello", "there", "my", "good", "friend"];
 
 const [greeting, ...anotherArray] = myArray;
 
 greeting; // 'hello'
-anotherArray;// ['there', 'my', 'good', 'friend']
+anotherArray; // ['there', 'my', 'good', 'friend']
 ```
 
 ## -----------FUNCTIONS-----------
@@ -233,26 +228,27 @@ let n = num.toString(2); // "1111011"
 `Object.hasOwnProperty(prop)` or `prop in Object` will return true or false depending on wether the object has or doesn't have that property.
 
 ```javascript
-let myObj = {'name': 'Simon', 'laptop': 'macbook'};
+let myObj = { name: "Simon", laptop: "macbook" };
 
-myObj.hasOwnProperty('name'); //=> true
-myObj.hasOwnProperty('lastName'); //=> false
+myObj.hasOwnProperty("name"); //=> true
+myObj.hasOwnProperty("lastName"); //=> false
 
-'name' in myObj; //=> true
-'dog' in myObj; //=> false
+"name" in myObj; //=> true
+"dog" in myObj; //=> false
 ```
 
 ## -----------RETURN WITH &&-----------
+
 `&&` actually returns a value.
 If the left side is falsy, the left side gets returned.
 If the left side is truthy, the right side gets returned.
 
 ```javascript
-'hello' && 'jello'; //=> 'jello'
+"hello" && "jello"; //=> 'jello'
 
-0 && 'jello'; //=> 0
+0 && "jello"; //=> 0
 
-'jello' && false; //=> false
+"jello" && false; //=> false
 ```
 
 ## -----------REGEX-----------
@@ -266,10 +262,10 @@ For example, if we're looking for the word 'bacon' in 'bacon pancakes', we can u
 ```javascript
 // need to use '/' to start a regex
 // the following will only look for 'bacon', not 'Bacon', 'BACON', or anything else.
-let myRegex = /bacon/
-let myString = 'bacon pancakes'
+let myRegex = /bacon/;
+let myString = "bacon pancakes";
 
-myRegex.test(myString) // true
+myRegex.test(myString); // true
 ```
 
 ### OR
@@ -279,10 +275,10 @@ The example above is rigid since it only checks for that literal string. We can 
 For example, I want to check if a string contains 'bacon', 'pork', or 'eggs'.
 
 ```javascript
-let myRegex = /bacon|pork|eggs/
-let myString = 'I really want eggs for breakfast today'
+let myRegex = /bacon|pork|eggs/;
+let myString = "I really want eggs for breakfast today";
 
-myRegex.test(myString) // true
+myRegex.test(myString); // true
 ```
 
 ### IGNORE CASE
@@ -292,10 +288,10 @@ What if the string was `'Bacon pancakes, making Bacon pancakes'`? We can use the
 `i` meaning ignore.
 
 ```javascript
-let myRegex = /bacon/i
-let myString = 'Bacon pancakes, making Bacon pancakes'
+let myRegex = /bacon/i;
+let myString = "Bacon pancakes, making Bacon pancakes";
 
-myRegex.test(myString) // true
+myRegex.test(myString); // true
 ```
 
 ### EXTRACT MATCHES
@@ -305,11 +301,11 @@ myRegex.test(myString) // true
 Example:
 
 ```javascript
-let myRegex = /bacon/
-let myString = 'bacon pancakes'
+let myRegex = /bacon/;
+let myString = "bacon pancakes";
 
 // get the first match
-myString.match(myRegex) // ["bacon"]
+myString.match(myRegex); // ["bacon"]
 ```
 
 You can find more than one match by using the `g` flag. You can have multiple regex flags. e.g. `/bacon/ig`
@@ -317,25 +313,25 @@ You can find more than one match by using the `g` flag. You can have multiple re
 `g` meaning global search.
 
 ```javascript
-let myRegex = /bacon/ig // notice i and g flag
-let myString = 'Bacon pancakes, making Bacon pancakes' 
+let myRegex = /bacon/gi; // notice i and g flag
+let myString = "Bacon pancakes, making Bacon pancakes";
 
-myString.match(myRegex) // ["Bacon", "Bacon"]
+myString.match(myRegex); // ["Bacon", "Bacon"]
 ```
 
-### MATCH ANYTHING WITH WILDCARD 
+### MATCH ANYTHING WITH WILDCARD
 
 The wildcard lets you match any one character. The wildcard character is: `.` The wildcard is also called 'dot' and 'period'.
 
-If you want any of the following words: hug, hum, hut, hue, and huh, you'd use: `/hu./` to match all of those. 
+If you want any of the following words: hug, hum, hut, hue, and huh, you'd use: `/hu./` to match all of those.
 
 ```javascript
 // example from freecodecamp
 // match the words 'pun', 'sun', 'run', 'fun'
-let myRegex = /.um/
-let myString = 'what is going on with the sun?'
+let myRegex = /.um/;
+let myString = "what is going on with the sun?";
 
-myString.match(myRegex) // ["sun"]
+myString.match(myRegex); // ["sun"]
 ```
 
 ### MATCH SINGLE CHARACTER WITH MULTIPLE POSSIBILITIES
@@ -346,10 +342,10 @@ Imagine you wanted to match a **range** of letters. That's a lot of characters t
 
 ```javascript
 // match all letters
-let myRegex = /[a-z]/ig
-let myString = "yo what's really good?"
+let myRegex = /[a-z]/gi;
+let myString = "yo what's really good?";
 
-myString.match(myRegex) // ["y", "o", "w", ...]
+myString.match(myRegex); // ["y", "o", "w", ...]
 ```
 
 ### MATCH NUMBERS AND LETTERS OF THE ALPHABET
@@ -373,35 +369,35 @@ You may want to match characters that occur one or more times in a row. This mea
 Use the `+` character.
 
 ```javascript
-let myRegex = /s+/g
-let myString = "Mississippi"
-myString.match(myRegex) // ["ss", "ss"]
+let myRegex = /s+/g;
+let myString = "Mississippi";
+myString.match(myRegex); // ["ss", "ss"]
 
-let myOtherString = "Misisipi"
-myOtherString.match(myRegex) // ["s", "s"]
+let myOtherString = "Misisipi";
+myOtherString.match(myRegex); // ["s", "s"]
 ```
 
 Matching characters that occur zero or more times is also possible by using the asterisk character: `*`.
 
 ```javascript
-let myRegex = /so*/g
-let myString = "sooooooo what's going on?"
-myString.match(myRegex) // ["sooooooo"]
+let myRegex = /so*/g;
+let myString = "sooooooo what's going on?";
+myString.match(myRegex); // ["sooooooo"]
 
-let myOtherString = "sun is up"
-myOtherString.match(myRegex) // ["s", "s"]
+let myOtherString = "sun is up";
+myOtherString.match(myRegex); // ["s", "s"]
 
-let anotherString = "so what's good?"
-anotherString.match(myRegex) // ["so"]
+let anotherString = "so what's good?";
+anotherString.match(myRegex); // ["so"]
 ```
 
 ### LAZY MATCHING
 
-Regular expressions that are `greedy` matches will find the longest possible substring that matches. 
+Regular expressions that are `greedy` matches will find the longest possible substring that matches.
 
 e.g., `/t[a-z]*i` will match `titani` from `titanic`.
 
-If we wanted the shortest substring, that would be `lazy` matching . We can use the `?` character to change it to lazy matching. 
+If we wanted the shortest substring, that would be `lazy` matching . We can use the `?` character to change it to lazy matching.
 
 e.g., `/t[a-z]*?i/` will match `ti` from `titanic`.
 
@@ -412,12 +408,12 @@ We can also use regex to search for patterns in specific positions in strings.
 Outside of `character sets`, the caret character `^` is used to search for patters at the beginning of a string.
 
 ```javascript
-let myRegex = /^bacon/
-let myString = "bacon pancakes"
-myRegex.test(myString) // true
+let myRegex = /^bacon/;
+let myString = "bacon pancakes";
+myRegex.test(myString); // true
 
-let myOtherString = "making bacon pancakes"
-myRegex.test(myOtherString) // false
+let myOtherString = "making bacon pancakes";
+myRegex.test(myOtherString); // false
 ```
 
 ### MATCH ENDING STRING PATTERNS
@@ -425,38 +421,38 @@ myRegex.test(myOtherString) // false
 To search the end of strings, use the `dollar sign` characer: `$` at the end of the regex.
 
 ```javascript
-let myRegex = /waddup$/
-let myString = "so waddup"
+let myRegex = /waddup$/;
+let myString = "so waddup";
 
-myRegex.test(myString) // true
+myRegex.test(myString); // true
 ```
 
 ### MATCH ALL LETTERS AND NUMBERS
 
-We already know how to use `character sets` like `/[a-z]/`. 
+We already know how to use `character sets` like `/[a-z]/`.
 
 This `/[a-zA-Z0-9_]/` is the same as `/\w/`. The `\w` part is a shortcut. Note that this also includes the underscore character: `_`.
 
 `w` meaning any word character.
 
 ```javascript
-let myRegex = /\w/g
-let myString = 'yo waddup 6ix9ine'
+let myRegex = /\w/g;
+let myString = "yo waddup 6ix9ine";
 
-myString.match(myRegex).length // 15
+myString.match(myRegex).length; // 15
 ```
 
 ### MATCH ALL EXCEPT LETTERS AND NUMBERS
 
-The opposite of `\w` is `\W`. 
+The opposite of `\w` is `\W`.
 
 `\W` is the same as `/[^A-Za-z0-9_]/`.
 
 ```javascript
-let myRegex = /\W/g
-let myString = "It's so cold!!"
+let myRegex = /\W/g;
+let myString = "It's so cold!!";
 
-myString.match(myRegex).length // 5 (it counted white space as well)
+myString.match(myRegex).length; // 5 (it counted white space as well)
 ```
 
 ### MATCH ALL NUMBERS
@@ -499,28 +495,28 @@ e.g., `/colou?r/`
 
 ### POSITIVE AND NEGATIVE LOOKAHEAD
 
-`Lookaheads` are patterns that tell JS to look-ahead in the string to check for patterns further along. 
+`Lookaheads` are patterns that tell JS to look-ahead in the string to check for patterns further along.
 
 There are two kinds of `lookaheads`: `positive lookahead` and `negative lookahead`.
 
 `Positive lookahead` will look to make sure the element in the search pattern is there, but won't actually match it. The syntax for `positive lookahead` is: `(?=...)` where `...` is the required part that is not matched.
 
-Given `hello world` and you only want `hello` if ` world` is present afterwards. 
+Given `hello world` and you only want `hello` if `world` is present afterwards.
 
 ```javascript
-let myRegex = /hello(?=\sworld)/
-let myString = "hello world"
+let myRegex = /hello(?=\sworld)/;
+let myString = "hello world";
 
-myString.match(myRegex) // hello
+myString.match(myRegex); // hello
 ```
 
 `Negative lookahead` will look ahead and check to make sure the element in the search pattern is **not** there. The syntax is: `(?!...)` where `...` is the pattern you don't want to be there.
 
 ```javascript
-let myString = "dragon ahead"
-let myRegex = /dragon(?!\sahead)/
+let myString = "dragon ahead";
+let myRegex = /dragon(?!\sahead)/;
 
-myString.match(myRegex) // null
+myString.match(myRegex); // null
 ```
 
 ## ASYNCHRONOUS JAVASCRIPT
@@ -536,12 +532,12 @@ We can create a new Promise object as follows:
 ```javascript
 // a Promise object needs an executor function that has two parameters which will determine whether the promise has been resolved or rejected
 let exectuor = (resolve, reject) => {
-	if (someCondition) {
-		resolve('what the promise returns if success') // it is still a promise
-	} else {
-		reject('what the promise returns if rejected') // still a promise
-	}
-}
+  if (someCondition) {
+    resolve("what the promise returns if success"); // it is still a promise
+  } else {
+    reject("what the promise returns if rejected"); // still a promise
+  }
+};
 let myPromise = new Promise(executor);
 ```
 
@@ -553,19 +549,19 @@ You can use the higher order function `.then()` which takes 0-2 callback functio
 
 ```javascript
 let myPromise = new Promise((resolve, reject) => {
-	if (someCondition) {
-		resolve('success!')
-	} else {
-		reject('no bueno :(')
-	}
-})
+  if (someCondition) {
+    resolve("success!");
+  } else {
+    reject("no bueno :(");
+  }
+});
 
 const handleSuccess = successValue => console.log(successValue);
 const handleFailure = failValue => console.log(failValue);
 
 // depending on what that someCondition is, here are the possible outcomes
-myPromise.then(handleSuccess, handleFailure) // success!
-myPromise.then(handleSuccess, handleFailure) // no bueno :(
+myPromise.then(handleSuccess, handleFailure); // success!
+myPromise.then(handleSuccess, handleFailure); // no bueno :(
 ```
 
 It's nicer to have separation of concerns for handling success and failure. Luckily we have `.catch()` to help us. When there is an error, `.catch()` will run right after, bypassing all `.then()` that come before `.catch()`.
@@ -573,12 +569,12 @@ It's nicer to have separation of concerns for handling success and failure. Luck
 ```javascript
 // assume prom is a promise
 prom
-	.then(resolvedValue => {
-		console.log(resolvedValue)
-	})
-	.catch(rejectedValue => {
-		console.log(rejectedValue)
-	})
+  .then(resolvedValue => {
+    console.log(resolvedValue);
+  })
+  .catch(rejectedValue => {
+    console.log(rejectedValue);
+  });
 ```
 
 Let's use `.then()` the way it's commonly used instead of just logging results. If we chain multiple `.then()`, we need to make sure that we `return` something in each one.
@@ -612,9 +608,9 @@ You can process `Promise.all` like any other promise. The return value is an arr
 We use `async` to write functions that handle asychronous actions. We can just write whatever logic within that function and invoke it. The logic within is handled asynchronously.
 
 ```javascript
-async function myFunc(){
-	// Function body here
-};
+async function myFunc() {
+  // Function body here
+}
 
 myFunc();
 ```
@@ -622,12 +618,12 @@ myFunc();
 ```javascript
 // async function expressions (arrow function)
 const myFunc = async () => {
-	// Function body here
+  // Function body here
 };
 myFunc();
 ```
 
-`async` functions always return a Promise, which means we can use `.then`, `.catch`, and `.finally`. 
+`async` functions always return a Promise, which means we can use `.then`, `.catch`, and `.finally`.
 
 Three things that can go down depending on what's returned by the `async` function:
 
@@ -635,15 +631,15 @@ Three things that can go down depending on what's returned by the `async` functi
 - If there's a non-Promise value returned from the function, it will return a Promise resolved to that value.
 - If there's a Promise value returned from the function, it will return just that Promise.
 
-An `async` function is almost always accompanied with the `await` keyword inside it. The `await` keyword can only be used inside an `async` function and it is an operator. It returns the resolved value of a Promise. 
+An `async` function is almost always accompanied with the `await` keyword inside it. The `await` keyword can only be used inside an `async` function and it is an operator. It returns the resolved value of a Promise.
 
 Here's an example:
 
 ```javascript
 // makeCoffee is a function that returns a Promise that resolves to the value of a random coffee drink
-async function coffeeTime(){
-	let coffee = await makeCoffee()
-	console.log(`This ${coffee} is delicious!`)
+async function coffeeTime() {
+  let coffee = await makeCoffee();
+  console.log(`This ${coffee} is delicious!`);
 }
 
 coffeeTime(); // This frappe is delicious!
@@ -651,3 +647,87 @@ coffeeTime(); // This frappe is delicious!
 
 If you try calling `makeCoffee` without `await`, `coffee` will immediately be set the value of a pending Promise. **So don't forget!**
 
+We can also use the `try` and `catch` block for error handling.
+
+```javascript
+async function makeCoffee() {
+  try {
+    let coffee = await makeCoffee();
+    return coffee;
+  } catch (error) {
+    console.log(error);
+    console.log("the coffee machine is broken or something");
+  }
+}
+```
+
+Also, don't forget we have `Promise.all()` to make asynchronous actions happen concurrently.
+
+## SETS
+
+[Notes from Colt Steele's Video](https://www.youtube.com/watch?v=4pRkrVwpLQo)
+
+[Written notes from Colt Steele](https://www.notion.so/JavaScript-Sets-78e65b865ab747f79828e442f25653da)
+
+Sets are a data structure that allows you to store a collection of _unique_ values.
+
+Sets do not support random access, re-ordering and many other features that arrays do support.
+
+To make a new set:
+
+```javascript
+// there is no shortcut syntax
+const mySet = new Set();
+
+// we can also pass in an iterable
+new Set(["hello", "there"]); //=> Set(2) {"hello", "there"}
+
+new Set("dog"); //=> Set(3) {"d", "o", "g"}
+```
+
+### ADD TO SETS
+
+Add to sets with `add()`. i.e. `mySet.add(3)`.
+
+If you try adding a duplicate value, it will be ignored. You can only add one value at a time to `add()`.
+
+### CHECK SIZE OF SETS
+
+Use the `size` property to determine the number of values stored in a set: `mySet.size`.
+
+### CHECK FOR VALUES IN A SET
+
+We are able to check if a set contains a given value using `has()`:
+
+```javascript
+const evens = new Set([2, 4, 5, 6, 8]);
+evens.has(10); // false
+```
+
+### REMOVING VALUES FROM A SET
+
+Use `delete()` to remove a single value from a set: `evens.delete(4)`. This will return `true` or `false`.
+
+We can also use `clear()` to empty a set of all values: `evens.clear()`
+
+### ITERATE THROUGH SETS
+
+We can use the `for...of` loop to go through the values of a set:
+
+```javascript
+const evens = new Set([2, 4, 6, 8, 10]);
+for (let val of evens) {
+	console.log(val, "is even.")
+}
+```
+
+### WHY USE SETS?
+
+You can use sets to quickly grab unique values from an array:
+
+```javascript
+const evenArray = [2, 4, 6, 8, 10, 12, 2, 4]
+const evenSet = new Set(evens) //=> Set(6) {2, 4, 6, 8, 10, 12}
+```
+
+When order doesn't matter. Remember you don't have random access, but you can check really quickly if your set contains a value with `has()`.
