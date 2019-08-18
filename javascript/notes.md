@@ -717,7 +717,7 @@ We can use the `for...of` loop to go through the values of a set:
 ```javascript
 const evens = new Set([2, 4, 6, 8, 10]);
 for (let val of evens) {
-	console.log(val, "is even.")
+  console.log(val, "is even.");
 }
 ```
 
@@ -726,8 +726,212 @@ for (let val of evens) {
 You can use sets to quickly grab unique values from an array:
 
 ```javascript
-const evenArray = [2, 4, 6, 8, 10, 12, 2, 4]
-const evenSet = new Set(evens) //=> Set(6) {2, 4, 6, 8, 10, 12}
+const evenArray = [2, 4, 6, 8, 10, 12, 2, 4];
+const evenSet = new Set(evens); //=> Set(6) {2, 4, 6, 8, 10, 12}
 ```
 
 When order doesn't matter. Remember you don't have random access, but you can check really quickly if your set contains a value with `has()`.
+
+## PRIMITIVE TYPES
+
+[Notes from Anthony Alicea's JavaScript Course](https://www.udemy.com/user/anthonypalicea/)
+
+Here are the 6 primitive types in JavaScript:
+
+- UNDEFINED
+  - `undefined`: represents lack of existence (you can set a variable to this, but don't do it for sake of sanity)
+- NULL
+  - `null`: represents lack of existence (you can set a variable to this)
+- BOOLEAN
+  - `true` or `false`
+- NUMBER
+  - _Floating point_ number (there's awlays some decimals). Unlike other programming languages, there's only one 'number' type... and it can make math weird.
+- STRING
+  - a sequence of characters (both single and double quotes can be used)
+- SYMBOL
+  - Symbols act as unique object keys.
+
+## OPERATOR
+
+A special function that is syntactically (written) differently.
+
+Generally, operators take two parameters and return one result.
+
+How does the JavaScript engine do this:
+
+```javascript
+var a = 3 + 4;
+console.log(a); // 7
+```
+
+An operator is actually a function that is in 'infix' notation. Infix just means that the operator is between the two parameters. Infix makes is very human readable. `3 + 4;`
+
+Other types of notation are pre-fix `+3 4;` and post-fix `3 4+;`.
+
+Common operators:
+
+- `-`, `/`, `*`, `%`
+- `>`, `<`, `<=`, `>=`, `==`, `===`
+
+Operator precedence: which operator function gets called first. Function are called in order of precedence (HIGHER precedence wins).
+
+Associativity (reference to operators): what order operator functions get called in: left-to-right or right-to-left. When functions have the **SAME** precedence.
+
+You can find the [precedence and associativity for operators here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence)
+
+Example of operator precedence:
+
+```javascript
+var a = 3 + 4 * 5;
+console.log(a); // 23
+```
+
+What is actually happening in that line? Since `*` has a higher precendence than `+`, it will run first and return a value.
+
+```javascript
+var a = 3 + 20;
+console.log(a);
+```
+
+and then finally,
+
+```javascript
+var a = 23;
+console.log(a); // 23
+```
+
+Example of associativity:
+
+```javascript
+var a = 2,
+  b = 3,
+  c = 4;
+
+a = b = c;
+
+console.log(a, b, c); // 4 4 4
+```
+
+Why did they all take on the value of 4? The assignment operator `=` is read from right-to-left.
+
+So what happens is:
+
+```javascript
+a = b = c; // c = 4
+a = b = 4;
+a = 4;
+```
+
+## COERCION
+
+Coercion is the conversion of a value from one type to another. This happens often in JavaScript because it's dynamically typed.
+
+What happens when you add a string and a number?
+
+```javascript
+var a = 1 + "2";
+console.log(a); // 12
+```
+
+JavaScript engine coerces the number 1 into the string '1' and concatenates it with '2'.
+
+## COMPARISON OPERATORS
+
+What do you expect from the following?
+
+```javascript
+console.log(1 < 2 < 3);
+```
+
+<details>
+<summary>Click here for answer</summary>
+<p>
+
+If you guessed `true`, then you'd be right.
+
+<p>
+</details>
+
+What about this?
+
+```javascript
+console.log(3 < 2 < 1);
+```
+
+<details>
+<summary>Click here for answer</summary>
+<p>
+
+This also returns `true`... Why?
+
+This is because these operators are running left-to-right. Meaning this is what's happening
+
+```javascript
+3 < 2 < 1; // 3 < 2 => false
+```
+
+```javascript
+false < 1; // => true
+```
+
+Why? Because `false` is coerced into the number 0. You can check by using `Number(false)`. `true` is coerced into 1.
+
+Therefore, this is the result:
+
+```javascript
+console.log(3 < 2 < 1); // true
+```
+
+<p>
+</details>
+
+Coercion can prove to be useful in some cases, but more often than not it produced unexpected results and confusion.
+
+JavaScript provides with the equality operator `==` and the strict equality operator `===`. The strict equality will not coerce values which makes it much more reliable.
+
+```javascript
+3 == "3"; // true
+3 === "3"; // false
+```
+
+`===` is the go-to equality operator. The only time you use `==` is if you consciously know that you want the values to be coerced.
+
+## EXISTENCE AND BOOLEANS
+
+We can check what boolean a value is coerced to using `Boolean`.
+
+```javascript
+Boolean(null); // false
+Boolean(""); // false
+Boolean(0); // false
+Boolean(NaN); // false
+Boolean(undefined); // false
+
+Boolean(1); // true
+Boolean("hello"); // true
+```
+
+We can use coercion to our advantage.
+
+```javascript
+var a;
+a = 123;
+
+if (a) {
+  console.log('a is not empty')
+}
+
+// 'a is not empty' is logged
+```
+
+
+```javascript
+var a;
+
+if (a) {
+  console.log('a is not empty')
+}
+
+// nothing is logged here
+```
+
