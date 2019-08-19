@@ -935,3 +935,41 @@ if (a) {
 // nothing is logged here
 ```
 
+## FIRST CLASS FUNCTIONS
+
+Functions are objects (a very special type). 
+
+Everything you can do with other types you can do with functions. We can assign them to variables, pass them around, create them on the fly.
+
+A function can have a primitive, an object, a function, name, and code that is invocable.
+
+## IMMEDIATELY INVOKED FUNCTION EXPRESSIONS (IIFE)
+
+Pronounced iffy.
+
+An IIFE is kind of what it sounds like. It's a function that is invoked on the fly. Here's how to write one.
+
+```javascript
+(function(name) {
+  let greeting = 'Hello there '
+  console.log(greeting + name)
+}('Jojo')) //=> Hello there Jojo
+```
+
+It's an anonymous function thats wrapped in parentheses and then invoked. The parentheses that invoke the function could be outside or inside the wrapper parentheses. This is a matter of your own stylistic choice. Pick one and be consistent.
+
+```javascript
+(function(param) {
+  // body
+})(arg)
+
+(function(param) {
+  // body
+}(arg))
+```
+
+IIFEs create their own execution context and thus create safe code that won't collide with external variables.
+
+## GOOD TO KNOW
+
+- an *expression* returns a value.
