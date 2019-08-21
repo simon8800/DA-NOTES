@@ -973,3 +973,19 @@ IIFEs create their own execution context and thus create safe code that won't co
 ## GOOD TO KNOW
 
 - an *expression* returns a value.
+
+## PROTOTYPE
+
+All objects, including functions, have a prototype property. It's a reference to a property called `proto`. There is a prototype chain that contains hidden built-in methods and properties that an object looks when we try to access something we never set. For example,
+
+```javascript
+let myObj = {
+  fname: 'Giorno',
+  lname: 'Giovanna'
+}
+
+myObj.fname // this is a prop we set.
+
+myObj.hasOwnProperty('fname') // hasOwnProperty is given to us by proto. We don't have to go myObj.__proto__.hasOwnProperty
+```
+
