@@ -989,3 +989,62 @@ myObj.fname // this is a prop we set.
 myObj.hasOwnProperty('fname') // hasOwnProperty is given to us by proto. We don't have to go myObj.__proto__.hasOwnProperty
 ```
 
+You can even do something like this (don't ever do this though):
+
+```javascript
+let person = {
+  fname: 'Default',
+  lname: 'Default',
+  getFullName: function() {
+    return this.fname + ' ' + this.lname;
+  }
+}
+
+let jojo = {
+  fname: 'Jojo',
+  lname: 'Joestar'
+}
+
+jojo.__proto__ = person;
+jojo.getFullName() // Jojo Joestar <-- this is because jojo doesn't have the getFullName method, so it looks in the proto object
+jojo.fname // Jojo <-- this is because the jojo object looks as its own props first
+```
+
+## BUILDING OBJECTS
+
+```javascript
+function Person() {
+  
+  this.firstname = 'John';
+  this.lastname = 'Doe';
+
+  console.log('This function is invoked');
+}
+
+const john = new Person(); // new is an operator that creates an empty object and then calls the function that adds properties and methods
+
+console.log(john); // Person {fname, lname}
+```
+
+If we do not return anything in the function, a new object will be created. If we return an object, that will get in the way of constructing an object.
+
+Example:
+
+```javascript
+function Person() {
+  
+  this.firstname = 'John';
+  this.lastname = 'Doe';
+
+  return {greeting: 'obstructed'};
+}
+
+const john = new Person();
+console.log(john); // {greeting: 'obstructed'}
+```
+
+`this` in the function will point to a new empty object and that object is returned from the function automatically because of the `new` operator.
+
+
+## FUNCTION CONSTRUCTORS AND PROTOTYPES
+
