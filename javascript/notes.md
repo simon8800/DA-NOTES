@@ -1007,7 +1007,7 @@ IIFEs create their own execution context and thus create safe code that won't co
 
 ## PROTOTYPE <a name="prototype"></a>
 
-All objects, including functions, have a prototype property. It's a reference to a property called `proto`. There is a prototype chain that contains hidden built-in methods and properties that an object looks when we try to access something we never set. For example,
+All objects, including functions, have a prototype property. It's a reference to a property called `proto`. There is a prototype chain that contains hidden built-in methods and properties that an object looks at when we try to access something we never set. For example,
 
 ```javascript
 let myObj = {
@@ -1079,7 +1079,7 @@ console.log(john); // {greeting: 'obstructed'}
 
 ## FUNCTION CONSTRUCTORS AND PROTOTYPES <a name="constructors-and-prototypes"></a>
 
-We can use the `.prototype` constructor for functions to create new properties and functions for objects that already exist.
+We can use the `.prototype` constructor for functions to create new properties and functions for objects that already exist and future objects.
 
 For example:
 
@@ -1097,7 +1097,7 @@ Person.prototype.getFullName = function() {
 console.log(jojo.getFullName()); // Jojo Joestar
 ```
 
-Why do we do prototypes? Why don't we just put methods in the Person function? This is because if we have methods in the funciton, on a new object creation, that object gets a copy of the method. So if we had 1000 objects, then there are 1000 copies of methods for each one.
+Why do we do prototypes? Why don't we just put methods in the Person function? This is because if we have methods in the function, on a new object creation, that object gets a copy of the method. So if we had 1000 objects, then there are 1000 copies of methods for each one.
 
 It is much more efficient to create prototypes so only one copy is used.
 
