@@ -2,7 +2,12 @@
 
 A lot of these notes were found by doing [freecodecamp](https://www.freecodecamp.org/) and reading [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS) and [Anthony Alicea's Udemy Course](https://www.udemy.com/user/anthonypalicea/).
 
-## -----------DECLARING WITH VAR-----------
+## TABLE OF CONTENTS
+
+- [Declaring with Var](#declaring-with-var)
+- [Hoisting](#hoisting)
+
+## DECLARING WITH VAR <a name="declaring-with-var"></a>
 
 Remember, variables declared with `var` are function-scoped. So the following variable `i` is accessible outside the for-loop since that's only a block.
 
@@ -19,7 +24,7 @@ for (var i = 0; i < 10; i++) {
 console.log(i); // 10
 ```
 
-## -----------HOISTING-----------
+## HOISTING <a name="hoisting"></a>
 
 [Good article explaining hositing](https://scotch.io/tutorials/understanding-hoisting-in-javascript)
 
