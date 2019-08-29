@@ -4,8 +4,34 @@ A lot of these notes were found by doing [freecodecamp](https://www.freecodecamp
 
 ## TABLE OF CONTENTS
 
-- [Declaring with Var](#declaring-with-var)
+- [Declaring With Var](#declaring-with-var)
 - [Hoisting](#hoisting)
+- [Engine, Compiler, Scope](#engine-compiler-scope)
+- [Block Scoping](#block-scoping)
+- [THIS](#this-keyword)
+- [Destructuring (ES6)](#destructuring)
+- [Functions](#functions)
+- [Data Structures](#data-structures)
+- [Return with &&](#return-with-&&)
+- [RegEx](#regex)
+- [Asynchronous JavaScript](#async-js)
+- [Async...Await](#async-await)
+- [Sets](#sets)
+- [Primitive Types](#primitive-types)
+- [Operator](#operator)
+- [Coercion](#coercion)
+- [Comparision Operators](#comparison-operators)
+- [Existence and Booleans](#existence-and-booleans)
+- [First Class Functions](#first-class-functions)
+- [Immediately Invoked Function Expressions (IIFE)](#iife)
+- [GOOD TO KNOW](#good-to-know)
+- [Prototype](#prototype)
+- [Building Objects](#building-objects)
+- [Function Constructors and Prototypes](#constructors-and-prototypes)
+- [Object.create](#object-create)
+- [ES6 and Classes](#es6-and-classes)
+- [Figuring Out What Something Is](#typeof)
+- [Strict Mode](#strict-mode)
 
 ## DECLARING WITH VAR <a name="declaring-with-var"></a>
 
@@ -56,13 +82,13 @@ Note that if it was `var x = "hello buddy"`, we would get something totally diff
 
 I leave it for the reader as an exercise to try it themselves.
 
-## -----------ENGINE, COMPILER, SCOPE-----------
+## ENGINE, COMPILER, SCOPE <a name="engine-compiler-scope"></a>
 
 [You Dont Know JS explanation about compiling and executing.](https://github.com/getify/You-Dont-Know-JS/blob/master/scope%20%26%20closures/ch1.md)
 
 > Lexical scope means that scope is defined by author-time decisions of where functions are declared. The lexing phase of compilation is essentially able to know where and how all identifiers are declared, and thus predict how they will be looked-up during execution. -Kyle Simpson
 
-## -----------BLOCK SCOPING-----------
+## BLOCK SCOPING <a name="block-scoping"></a>
 
 Example from 'You Don't Know JS':
 
@@ -105,7 +131,7 @@ btn.addEventListener( "click", function click(evt){
 }, /*capturingPhase=*/false );
 ```
 
-## -----------THIS-----------
+## THIS <a name="this-keyword"></a>
 
 Using `call()` will give a function context to what `this` is.
 
@@ -176,7 +202,7 @@ let objfoo = foo.bind(obj);
 objfoo.name; // bound foo
 ```
 
-## -----------DESTRUCTURING (ES6)-----------
+## DESTRUCTURING (ES6) <a name="destructuring"></a>
 
 ### OBJECT
 
@@ -213,7 +239,7 @@ greeting; // 'hello'
 anotherArray; // ['there', 'my', 'good', 'friend']
 ```
 
-## -----------FUNCTIONS-----------
+## FUNCTIONS <a name="functions"></a>
 
 ### Number.toString
 
@@ -226,7 +252,7 @@ let num = 123;
 let n = num.toString(2); // "1111011"
 ```
 
-## -----------DATA STRUCTURES-----------
+## DATA STRUCTURES <a name="data-structures"></a>
 
 ### OBJECTS
 
@@ -242,7 +268,7 @@ myObj.hasOwnProperty("lastName"); //=> false
 "dog" in myObj; //=> false
 ```
 
-## -----------RETURN WITH &&-----------
+## RETURN WITH && <a name="return-with-&&"></a>
 
 `&&` actually returns a value.
 If the left side is falsy, the left side gets returned.
@@ -256,7 +282,7 @@ If the left side is truthy, the right side gets returned.
 "jello" && false; //=> false
 ```
 
-## -----------REGEX-----------
+## REGEX <a name="regex"></a>
 
 You can use Regular Expressions (regex) to find specific words in a string.
 
@@ -524,7 +550,7 @@ let myRegex = /dragon(?!\sahead)/;
 myString.match(myRegex); // null
 ```
 
-## ASYNCHRONOUS JAVASCRIPT
+## ASYNCHRONOUS JAVASCRIPT <a name="async-js"></a>
 
 [Notes from Codecademy](https://www.codecademy.com/)
 
@@ -606,7 +632,7 @@ Sometimes we have more than one asynchronous process happening. We can use `Prom
 
 You can process `Promise.all` like any other promise. The return value is an array of resolved / rejected promises. If any of the promises in the array is rejected, the whole `Promise.all` is rejected.
 
-## ASYNC...AWAIT
+## ASYNC...AWAIT <a name="async-await"></a>
 
 `async` and `await` are new keywords to help us write asynchronous JavaScript with easier to read and understand syntax. It provides the same functionality as the other way you know how to write async code, it is just syntactic sugar.
 
@@ -668,7 +694,7 @@ async function makeCoffee() {
 
 Also, don't forget we have `Promise.all()` to make asynchronous actions happen concurrently.
 
-## SETS
+## SETS <a name="sets"></a>
 
 [Notes from Colt Steele's Video](https://www.youtube.com/watch?v=4pRkrVwpLQo)
 
@@ -737,7 +763,7 @@ const evenSet = new Set(evens); //=> Set(6) {2, 4, 6, 8, 10, 12}
 
 When order doesn't matter. Remember you don't have random access, but you can check really quickly if your set contains a value with `has()`.
 
-## PRIMITIVE TYPES
+## PRIMITIVE TYPES <a name="primitive-types"></a>
 
 [Notes from Anthony Alicea's JavaScript Course](https://www.udemy.com/user/anthonypalicea/)
 
@@ -756,7 +782,7 @@ Here are the 6 primitive types in JavaScript:
 - SYMBOL
   - Symbols act as unique object keys.
 
-## OPERATOR
+## OPERATOR <a name="operator"></a>
 
 A special function that is syntactically (written) differently.
 
@@ -827,7 +853,7 @@ a = b = 4;
 a = 4;
 ```
 
-## COERCION
+## COERCION <a name="coercion"></a>
 
 Coercion is the conversion of a value from one type to another. This happens often in JavaScript because it's dynamically typed.
 
@@ -840,7 +866,7 @@ console.log(a); // 12
 
 JavaScript engine coerces the number 1 into the string '1' and concatenates it with '2'.
 
-## COMPARISON OPERATORS
+## COMPARISON OPERATORS <a name="comparison-operators"></a>
 
 What do you expect from the following?
 
@@ -901,7 +927,7 @@ JavaScript provides with the equality operator `==` and the strict equality oper
 
 `===` is the go-to equality operator. The only time you use `==` is if you consciously know that you want the values to be coerced.
 
-## EXISTENCE AND BOOLEANS
+## EXISTENCE AND BOOLEANS <a name="existence-and-booleans"></a>
 
 We can check what boolean a value is coerced to using `Boolean`.
 
@@ -940,7 +966,7 @@ if (a) {
 // nothing is logged here
 ```
 
-## FIRST CLASS FUNCTIONS
+## FIRST CLASS FUNCTIONS <a name="first-class-functions"></a>
 
 Functions are objects (a very special type). 
 
@@ -948,7 +974,7 @@ Everything you can do with other types you can do with functions. We can assign 
 
 A function can have a primitive, an object, a function, name, and code that is invocable.
 
-## IMMEDIATELY INVOKED FUNCTION EXPRESSIONS (IIFE)
+## IMMEDIATELY INVOKED FUNCTION EXPRESSIONS (IIFE) <a name="iife"></a>
 
 Pronounced iffy.
 
@@ -975,11 +1001,11 @@ It's an anonymous function thats wrapped in parentheses and then invoked. The pa
 
 IIFEs create their own execution context and thus create safe code that won't collide with external variables.
 
-## GOOD TO KNOW
+## GOOD TO KNOW <a name="good-to-know"></a>
 
 - an *expression* returns a value.
 
-## PROTOTYPE
+## PROTOTYPE <a name="prototype"></a>
 
 All objects, including functions, have a prototype property. It's a reference to a property called `proto`. There is a prototype chain that contains hidden built-in methods and properties that an object looks when we try to access something we never set. For example,
 
@@ -1015,7 +1041,7 @@ jojo.getFullName() // Jojo Joestar <-- this is because jojo doesn't have the get
 jojo.fname // Jojo <-- this is because the jojo object looks as its own props first
 ```
 
-## BUILDING OBJECTS
+## BUILDING OBJECTS <a name="building-objects"></a>
 
 ```javascript
 function Person() {
@@ -1051,7 +1077,7 @@ console.log(john); // {greeting: 'obstructed'}
 `this` in the function will point to a new empty object and that object is returned from the function automatically because of the `new` operator.
 
 
-## FUNCTION CONSTRUCTORS AND PROTOTYPES
+## FUNCTION CONSTRUCTORS AND PROTOTYPES <a name="constructors-and-prototypes"></a>
 
 We can use the `.prototype` constructor for functions to create new properties and functions for objects that already exist.
 
@@ -1077,7 +1103,7 @@ It is much more efficient to create prototypes so only one copy is used.
 
 Objects will go through their proto to find those methods. Much less memory space used.
 
-## OBJECT.CREATE
+## OBJECT.CREATE <a name="object-create"></a>
 
 ```javascript
 const person = {
@@ -1116,7 +1142,7 @@ if (!Object.create) {
 }
 ```
 
-## ES6 AND CLASSES
+## ES6 AND CLASSES <a name="es6-and-classes"></a>
 
 A class is still an object in JavaScript. Not the same as other programming languages.
 
@@ -1154,7 +1180,7 @@ Class in JavaScript is just syntatic sugar for function constructions.
 
 **Syntatic Sugar**: a different way to *type* something that doesn't change how it works under the hood.
 
-## FIGURING OUT WHAT SOMETHING IS
+## FIGURING OUT WHAT SOMETHING IS <a name="typeof"></a>
 
 JavaScript gives us some keywords to help us check what something is. 
 
@@ -1191,7 +1217,7 @@ console.log(typeof undefined); // undefined
 console.log(typeof null); // object - comes from a bug that's too late to fix from super early verison of JS
 ```
 
-## STRICT MODE
+## STRICT MODE <a name="strict-mode"></a>
 
 JavaScript is flexible and allows us to do a bunch of stuff. Sometimes this is not good for us when we have typos. For example the follow we have a variable `person` but we set `persom` to an object. It works just fine even though we didn't mean to do that. That makes this really tough to track down.
 
