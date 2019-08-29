@@ -16,8 +16,12 @@ const HashTable = function() {
 
   this.add = function addKeyValue(key, value) {
     let index = hash(key, storageLimit);
+    console.log(index);
+    // creates an index and stores data if there currently isn't any at current index
     if (storage[index] === undefined) {
       storage[index] = [[key, value]];
+    
+      // otherwise, go through the bucket at that index and check the key of each bucket. if any matches, overwrite it with current data
     } else {
       let inserted = false;
       for (let i = 0; i < storage[index].length; i++) {
@@ -26,6 +30,7 @@ const HashTable = function() {
           inserted = true;
         }
       }
+      // if inserted is still false, that means none of the keys match and so we add a new key/value pair to that bucket.
       if (inserted === false) {
         storage[index].push([key, value]);
       }

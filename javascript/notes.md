@@ -1,6 +1,6 @@
 # NOTES FOR JAVASCRIPT
 
-A lot of these notes were found by doing [freecodecamp](https://www.freecodecamp.org/) and reading [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS).
+A lot of these notes were found by doing [freecodecamp](https://www.freecodecamp.org/) and reading [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS) and [Anthony Alicea's Udemy Course](https://www.udemy.com/user/anthonypalicea/).
 
 ## -----------DECLARING WITH VAR-----------
 
@@ -1047,4 +1047,169 @@ console.log(john); // {greeting: 'obstructed'}
 
 
 ## FUNCTION CONSTRUCTORS AND PROTOTYPES
+
+We can use the `.prototype` constructor for functions to create new properties and functions for objects that already exist.
+
+For example:
+
+```javascript
+function Person(fname, lname) {
+  this.fname = fname;
+  this.lname = lname;
+} 
+
+const jojo = new Person('Jojo', 'Joestar');
+Person.prototype.getFullName = function() {
+  return this.fname + ' ' + this.lname;
+}
+
+console.log(jojo.getFullName()); // Jojo Joestar
+```
+
+Why do we do prototypes? Why don't we just put methods in the Person function? This is because if we have methods in the funciton, on a new object creation, that object gets a copy of the method. So if we had 1000 objects, then there are 1000 copies of methods for each one.
+
+It is much more efficient to create prototypes so only one copy is used.
+
+Objects will go through their proto to find those methods. Much less memory space used.
+
+## OBJECT.CREATE
+
+```javascript
+const person = {
+  fname: 'Default',
+  lname: 'Default',
+  greet: function() {
+    return 'Hi ' + this.fname;
+  }
+}
+
+const jojo = Object.create(person); // creates an empty object with __proto__ being person.
+console.log(jojo); // {}
+console.log(jojo.fname); // Default
+
+jojo.fname = 'Jojo';
+console.log(jojo.fname); // Jojo
+```
+
+If the engine you're using does not have `Object.create` we have polyfill.
+
+**Polyfill**: code that adds a feature which the engine *may* lack.
+
+```javascript
+// you would add this
+
+if (!Object.create) {
+  Object.create = function(o) {
+    if (arguments.length > 1) {
+      throw new Error('Object.create implementation'
+       + ' only accepts the first paramter.');
+    }
+    function F() {}
+    F.prototype = o;
+    return new F();
+  };
+}
+```
+
+## ES6 AND CLASSES
+
+A class is still an object in JavaScript. Not the same as other programming languages.
+
+```javascript
+// this is an object
+class Person {
+  constructor(firstname, lastname) {
+    this.firstname = firstname;
+    this.lastname = lastname;
+  }
+
+  greet() {
+    return 'Hi ' + firstname;
+  }
+}
+
+var john = new Person('Jojo', 'Joestar');
+```
+
+How do we make a `__proto__` for class? We use the keyword `extends`.
+
+```javascript
+class InformalPerson extends Person {
+  constructor(firstname, lastname) {
+    super(firstname, lastname);
+  }
+
+  greet() {
+    return 'Yo ' + firstname;
+  }
+}
+```
+
+Class in JavaScript is just syntatic sugar for function constructions.
+
+**Syntatic Sugar**: a different way to *type* something that doesn't change how it works under the hood.
+
+## FIGURING OUT WHAT SOMETHING IS
+
+JavaScript gives us some keywords to help us check what something is. 
+
+First up, we have `typeof`
+
+```javascript
+var a = 3;
+console.log(typeof a); // number
+
+var b = 'Hello';
+console.log(typeof b); // string
+
+var c = {};
+console.log(typeof c); // object
+
+var d = [];
+console.log(typeof d); // object - not so helpful...
+console.log(d.toString()); // ""
+console.log(Object.prototype.toString.call(d)); // [object Array] - nice
+```
+
+We also have `instanceof`.
+
+```javascript
+function Person(name) {
+  this.name = name;
+}
+
+var jojo = new Person('Jojo');
+console.log(typeof jojo); // object
+console.log(jojo instanceof Person); // true
+
+console.log(typeof undefined); // undefined
+console.log(typeof null); // object - comes from a bug that's too late to fix from super early verison of JS
+```
+
+## STRICT MODE
+
+JavaScript is flexible and allows us to do a bunch of stuff. Sometimes this is not good for us when we have typos. For example the follow we have a variable `person` but we set `persom` to an object. It works just fine even though we didn't mean to do that. That makes this really tough to track down.
+
+```javascript
+var person;
+persom = {};
+console.log(persom); // {}
+```
+
+We can use strict mode which tells the JavaScript engine to implement strict rules. One of the rules is that you must declare a variable before using it. `"use strict"` is function scoped.
+
+```javascript
+"use strict";
+
+var person;
+persom = {};
+console.log(persom); // error
+
+function hello() {
+  "use strict";
+  var person;
+  persom = {};
+  console.log(persom); // error
+}
+```
 
