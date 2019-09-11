@@ -3,7 +3,7 @@
 Notes from [PowerCert Animated Videos](https://www.youtube.com/watch?v=mpQZVYPuDGU)
 
 ## WHAT IS A DNS (DOMAIN NAME SYSTEM) ?
-Computers use numbers to identify themselves. DNS resolves domain names to I.P. addresses. 
+Computers use numbers to identify themselves. DNS resolves domain names to I.P. addresses.
 
 When you type in a web address, DNS will resolve that address to an I.P. address.
 

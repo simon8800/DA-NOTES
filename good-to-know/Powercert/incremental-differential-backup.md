@@ -1,4 +1,4 @@
-# INCREMENTAL VS DEIFFERNTIAL BACKUP
+# INCREMENTAL VS DIFFERENTIAL BACKUP
 
 Notes from [Powercert](https://www.youtube.com/watch?v=o-83E6levzM)
 
